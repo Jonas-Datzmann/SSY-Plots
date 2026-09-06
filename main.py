@@ -8,7 +8,7 @@ OUTPUT_DIRECTORY = Path("docs")
 X_LIMITS = (-100, 100)
 Y_LIMITS = (-2, 2)
 INITIAL_X_RANGE = (-1, 4)
-SAMPLES_PER_UNIT = 80
+SAMPLES_PER_UNIT = 200
 ADAPTIVE_X_TICK_SCRIPT = """
 const xAxis = document.getElementById('{plot_id}');
 const tickIntervalForRange = (range) => {
@@ -119,7 +119,7 @@ def build_figure(signal) -> go.Figure:
             x=x_values,
             y=y_values,
             mode="lines",
-            line={"color": "blue", "width": 2},
+            line={"color": "#7dd3fc", "width": 2},
             hovertemplate="x: %{x:g}T<br>y: %{y:g}h<extra></extra>",
             name="x(t)",
         )
@@ -133,10 +133,13 @@ def build_figure(signal) -> go.Figure:
         dtick=0.5,
         ticksuffix="T",
         showgrid=True,
-        gridcolor="rgba(128, 128, 128, 0.5)",
+        gridcolor="rgba(203, 213, 225, 0.35)",
         gridwidth=1,
         zeroline=True,
-        zerolinecolor="black",
+        zerolinecolor="#e2e8f0",
+        linecolor="#e2e8f0",
+        tickfont={"color": "#e2e8f0"},
+        title_font={"color": "#e2e8f0"},
         title="T",
     )
     figure.update_yaxes(
@@ -147,15 +150,19 @@ def build_figure(signal) -> go.Figure:
         tickvals=y_ticks,
         ticktext=axis_tick_labels(y_ticks, "h"),
         showgrid=True,
-        gridcolor="rgba(128, 128, 128, 0.5)",
+        gridcolor="rgba(203, 213, 225, 0.35)",
         gridwidth=1,
         zeroline=True,
-        zerolinecolor="black",
+        zerolinecolor="#e2e8f0",
+        linecolor="#e2e8f0",
+        tickfont={"color": "#e2e8f0"},
+        title_font={"color": "#e2e8f0"},
         title="h",
     )
     figure.update_layout(
-        plot_bgcolor="white",
-        paper_bgcolor="white",
+        plot_bgcolor="#151d2b",
+        paper_bgcolor="#111827",
+        font={"color": "#e2e8f0"},
         margin={"l": 70, "r": 30, "b": 60, "t": 60},
         hovermode="x",
     )
@@ -171,6 +178,15 @@ def write_index(plot_pages: list[tuple[str, str]]) -> None:
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Signals and Systems Plots</title>
+    <style>
+        body {{
+            background: #111827;
+            color: #e2e8f0;
+            font-family: system-ui, sans-serif;
+            margin: 2rem;
+        }}
+        a {{ color: #7dd3fc; }}
+    </style>
 </head>
 <body>
     <main>
